@@ -30,7 +30,9 @@
 		
 		var textInt = 0;
 		function nextText(){
+			if(textInt<2){
 			textInt = textInt+1;
+		}
 		}
 		function textChanger(){
 				if(textInt==0){
@@ -44,9 +46,10 @@
 			}
 			}
 		function lastText(){
+			if(textInt>0){
 			textInt = textInt-1;
 		}
-			
+		]
 		</script>
 
 	</body>
