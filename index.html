@@ -19,7 +19,10 @@
 			You seem to have forgotten important details about your qualifications and past experience that you need<br></br>
 			With hopes that it will come back to you 
 		</p>		
-		
+	
+			<div style= "width:100%; height:100%"align="center">
+			<button id ="nextBtn">Let's Begin</button>
+			</div>	
 		
 		<script>
 		var int textInt;
@@ -30,12 +33,12 @@
 		function textChanger(int x){
 			switch(textInt)
 				case 1:
-				document.getElementById("p1").innerHTML = "text change";
-		}
+					document.getElementById("p1").innerHTML = "text change";
+			}
+			
+			document.getElementById("nextBtn").addEventListener("click", nextText(){
+			});
 		</script>
-			<div style= "width:100%; height:100%"align="center">
-			<button onclick="nextText()">Increment</button>
-			</div>
-	
+
 	</body>
 </html>
