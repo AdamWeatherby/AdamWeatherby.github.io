@@ -14,12 +14,13 @@
 		<h1 align="center">Adam Weatherby,<br></br> and the adventure for employment</h1>
 		
 		<hr>
-		
-		<p id = "p1" align="center">
-			You are Adam Weatherby, a 21 year old college student trying to get an internship for Computer Science.<br></br>
-			You seem to have forgotten important details about your qualifications and past experience that you need<br></br>
-			With hopes that it will come back to you 
-		</p>		
+		<div id ="text">
+			<p id = "p1" align="center">
+				You are Adam Weatherby, a 21 year old college student trying to get an internship for Computer Science.<br></br>
+				You seem to have forgotten important details about your qualifications and past experience that you need<br></br>
+				With hopes that it will come back to you 
+			</p>		
+		</div>
 	
 			<div style= "width:100%; height:100%"align="center">
 				<button onclick="lastText();textChanger()">Back</button>
@@ -42,6 +43,7 @@
 				if(textInt==1){
 					document.getElementById("p1").innerHTML = "You start heading out the door and as you make progress down the road the earth begins to shake."+"<br></br>"+"You here a loud noise from above";
 					document.body.style.background = "black";
+					document.getElementById("text").style.color = 'blue';
 					}
 				if(textInt==2){
 					document.getElementById("p1").innerHTML = "text change";
