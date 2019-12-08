@@ -29,6 +29,9 @@
 				<button onclick="lastText();textChanger()">Back</button>
 				<button onclick="nextText();textChanger()">Next</button>
 			</div>	
+			<div class="progress">
+				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+			</div>
 		
 		<script>
 
@@ -53,12 +56,15 @@
 					document.getElementById("header").style.color = 'yellow';
 					}
 				if(textInt==2){
+					document.getElementById("p1").innerHTML = "An enemy approaches"+"<br></br>"+"It seems that an entity of the weather itself has decided to try to inhibit your progress to turn in your application";
+				}
+				if(textInt==10){
 					document.getElementById("p1").innerHTML = "text change";
 					document.getElementById("text").style.color = 'black';
 					document.getElementById("header").style.color = 'black';
 					document.body.style.background = "white";			
-			}
-			}
+				}
+		}
 		function lastText(){
 			if(textInt>0){
 			textInt = textInt-1;
