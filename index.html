@@ -10,39 +10,47 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body>
+		<h1 align="center">Adam Weatherby,<br></br> and the adventure for employment</h1>
 		
-    <div class="site-wrapper">
+		<hr>
+		
+		<p id = "p1" align="center">
+			You are Adam Weatherby, a 21 year old college student trying to get an internship for Computer Science.<br></br>
+			You seem to have forgotten important details about your qualifications and past experience that you need<br></br>
+			With hopes that it will come back to you 
+		</p>		
+	
+			<div style= "width:100%; height:100%"align="center">
+				<button onclick="lastText();textChanger()">Back</button>
+				<button onclick="nextText();textChanger()">Next</button>
+			</div>	
+		
+		<script>
 
-      <div class="site-wrapper-inner">
-
-        <div class="container">
-
-          <div class="masthead clearfix">
-            <div class="container inner">
-              <h3 class="masthead-brand">Cover</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Features</a></li>
-                  <li><a href="#">Contact</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-
-          <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Learn more</a>
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
+		
+		var textInt = 0;
+		function nextText(){
+			if(textInt<2){
+			textInt = textInt+1;
+		}
+		}
+		function textChanger(){
+				if(textInt==0){
+					document.getElementById("p1").innerHTML = "You are Adam Weatherby, a 21 year old college student trying to get an internship for Computer Science."+"<br></br>"+"You seem to have forgotten important details about your qualifications and past experience that you need"+"<br></br>"+"With hopes that it will come back to you";
+					}
+				if(textInt==1){
+					document.getElementById("p1").innerHTML = "test 1";
+					}
+				if(textInt==2){
+					document.getElementById("p1").innerHTML = "text change";
+			}
+			}
+		function lastText(){
+			if(textInt>0){
+			textInt = textInt-1;
+		}
+		}
+		</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
