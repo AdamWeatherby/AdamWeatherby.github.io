@@ -135,21 +135,21 @@
 					Halo.play();
 					document.getElementById("p1").innerHTML = "The sun begins to set<br></br>As it is getting late, you take a shortcut through an alleyway.<br></br>You hear rustling in the trash can behind you and you turn around";
 					document.getElementById("backButton").disabled = false;
-					document.body.style.background = "linear-gradient(to bottom, #6600cc 0%, #ff6600 100%) fixed";
+					document.body.style.background = "linear-gradient(to bottom, #6600cc 10%, #ff6600 100%) fixed";
 				}
 				if(textInt==5){
 					document.getElementById("striker").disabled = true;
 					document.getElementById("armorerbutton").disabled = true;
-					document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:green'>A goblin bursts from the trashcan, he gets a surprise attack on you for massive damage.<br></br>As this happens you remember that you were a lab assistant at PH Broughton during the Fall season of 2017<br></br>This experience with analyzing and interpreting information (along with it being an asphalt company) allows you to now build armor best suited to the situation to prevent damage<br></br><button id = 'hurter' onclick='hurtYou()'>Next</button></p>"
+					document.getElementById("p1").innerHTML = "A goblin bursts from the trashcan, he gets a surprise attack on you for massive damage.<br></br>As this happens you remember that you were a lab assistant at PH Broughton during the Fall season of 2017<br></br> This experience with analyzing and interpreting information allows you to now build armor best suited to the situation to prevent damage";
+					document.getElementById("enemyBar").innerHTML = "<br></br><button id = 'hurter' onclick='hurtYou()'>Next</button>"
 					enemyBar.style.display = "block";
 					turntoggler = 2;
-					enemyhealthpoints = 100;
-					document.getElementById("p1").innerHTML = "The sun begins to set<br></br>As it is getting late, you take a shortcut through an alleyway.<br></br>You hear rustling in the trash can behind you and you turn around";
+					enemyhealthpoints = 50;
 					document.body.style.background = "linear-gradient(to bottom, #6600cc 50%, #ff6600 100%) fixed";
 					bars.style.display = "block";
 					buttons.style.display = "none";
 					document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"</div>"
-					document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"</div>"
+					document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints*2+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"</div>"
 					menuBar.style.display = "block";
 					document.getElementById("backButton").disabled = true;
 				}
@@ -216,15 +216,15 @@
 			if(textInt == 5){
 			var carryover = 0;
 				if(armorpoints==0){
-					healthpoints = healthpoints - 30;
+					healthpoints = healthpoints - 35;
 				}
-				if(armorpoints!=0&&armorpoints<30){
-					carryover = 30 - armorpoints;
+				if(armorpoints!=0&&armorpoints<35){
+					carryover = 35 - armorpoints;
 					armorpoints = 0;
 					healthpoints = healthpoints - carryover;
 				}
-				if(armorpoints>=30){
-					armorpoints = armorpoints - 30;
+				if(armorpoints>=35){
+					armorpoints = armorpoints - 35;
 				}
 			}
 			document.getElementById("rockBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:red; width: "+armorpoints*2+"%; background-color:black; ' aria-valuenow='50' aria-valuemin='0' aria-valuemax='50'> Armor: "+armorpoints+"</div>"
@@ -234,13 +234,24 @@
 		}
 		
 		function strikeEnemy(){
-			enemyhealthpoints = enemyhealthpoints - 18;
+			if(textInt==2){
+				enemyhealthpoints = enemyhealthpoints - 23;
+			}
+			if(textInt==5){
+				enemyhealthpoints = enemyhealthpoints - 15;
+			}
+			
 			if(enemyhealthpoints<0){
 				enemyhealthpoints = enemyhealthpoints*0;
 				levelUp();
 				buttons.style.display = "block";
 			}
+			if(textInt==2){
 			document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"%</div>"
+			}
+			if(textInt==5){
+			document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints*2+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"%</div>"
+			}
 			turntoggler = turntoggler + 1;
 			turnBaser();
 		}
