@@ -131,6 +131,8 @@
 					document.body.style.background = "linear-gradient(to bottom, #6600cc 0%, #ff6600 100%) fixed";
 				}
 				if(textInt==5){
+					document.getElementById("striker").disabled = true;
+					document.getElementById("armorerbutton").disabled = true;
 					document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:green'>A goblin bursts from the trashcan, he gets a surprise attack on you for massive damage.<br></br>As this happens you remember that you were a lab assistant at PH Broughton during the Fall season of 2017<br></br>This experience with analyzing and interpreting information (along with it being an asphalt company) allows you to now build armor best suited to the situation to prevent damage<br></br><button id = 'hurter' onclick='hurtYou()'>Next</button></p>"
 					enemyBar.style.display = "block";
 					turntoggler = 2;
@@ -155,8 +157,10 @@
 			if(turntoggler%2==1||enemyhealthpoints==0){
 					enemyBar.style.display = "none";
 					document.getElementById("striker").disabled = false;
+					document.getElementById("armorerbutton").disabled = false;
 			}else{
 					document.getElementById("striker").disabled = true;
+					document.getElementById("armorerbutton").disabled = true;
 					enemyBar.style.display = "block";
 			}
 			turnBaser();
@@ -172,6 +176,9 @@
 			if(textInt==2){
 				document.getElementById("p1").innerHTML = "Congratulations!;<br></br>You have defeated your enemy, Though it seems he had not reached his full potential yet";
 			}
+			if(textInt==5){
+				document.getElementById("p1").innerHTML = "Whew!<br></br>'That was a close one', you think to yourself.<br></br> if only a potential employer had seen how impressive that was!";
+			}
 		}
 		
 		function armorer(){
@@ -179,10 +186,12 @@
 				armorpoints = 50;
 			}
 			else{
-				armorpoints = armorpoints+30;
+				armorpoints = armorpoints+50;
 			}
 			level2bar.style.display = "block";
-			document.getElementById("rockBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:white; width: "+armorpoints*2+"%; background-color:black; ' aria-valuenow='50' aria-valuemin='0' aria-valuemax='50'> Armor: "+armorpoints+"</div>"
+			document.getElementById("rockBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:red; width: "+armorpoints*2+"%; background-color:black; ' aria-valuenow='50' aria-valuemin='0' aria-valuemax='50'> Armor: "+armorpoints+"</div>"
+			turntoggler = turntoggler + 1;
+			turnBaser();
 		}
 		
 		function hurtYou(){
@@ -190,15 +199,27 @@
 				healthpoints = healthpoints - 7;
 			}
 			if(textInt == 5){
-				healthpoints = healthpoints - 20;
+			var carryover = 0;
+				if(armorpoints==0){
+					healthpoints = healthpoints - 30;
+				}
+				if(armorpoints!=0&&armorpoints<30){
+					carryover = 30 - armorpoints;
+					armorpoints = 0;
+					healthpoints = healthpoints - carryover;
+				}
+				if(armorpoints>=30){
+					armorpoints = armorpoints - 30;
+				}
 			}
+			document.getElementById("rockBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:red; width: "+armorpoints*2+"%; background-color:black; ' aria-valuenow='50' aria-valuemin='0' aria-valuemax='50'> Armor: "+armorpoints+"</div>"
 			document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"%</div>"
 			turntoggler = turntoggler + 1;
 			turnBaser();
 		}
 		
 		function strikeEnemy(){
-			enemyhealthpoints = enemyhealthpoints - 25;
+			enemyhealthpoints = enemyhealthpoints - 26;
 			if(enemyhealthpoints<0){
 				enemyhealthpoints = enemyhealthpoints*0;
 				levelUp();
