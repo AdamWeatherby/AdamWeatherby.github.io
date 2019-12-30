@@ -36,6 +36,8 @@
 					<button id = "striker" onclick="strikeEnemy()">Strike</button>
 					<br></br>
 					<button id = "armorerbutton" style = "display:none;"onclick="armorer()">Gain Armor</button>
+					</br>
+					<button id = "persuader" style = "display:none;"onclick="persuade()">Persuade enemy</button>
 				</div>	
 				
 				<div id = "enemyBar"; class="col-md-6"; style= "width:100%; height:100%; display:none;"align="center">
@@ -75,10 +77,12 @@
 		var playerlevel = 1;
 		var Metal = new Audio("./For Whom The Bell Tolls.webm");
 		var Halo = new Audio("./Halo.mp3");
+		var One = new Audio("./giantOne.mp4");
+		var success = new Audio("./Success.mp4");
 
 		var textInt = 0;
 		function nextText(){
-			if(textInt<5){
+			if(textInt<9){
 			textInt = textInt+1;
 			}
 		}
@@ -154,12 +158,45 @@
 					document.getElementById("backButton").disabled = true;
 				}
 				if(textInt==6){
-					
+					Halo.pause();
+					One.play();
+					document.getElementById("p1").innerHTML = "<br></br>It is dark out now<br></br>You head on down the road full of confidence, if that enemy could not defeat you then you must truly be destined to succeed";
+					document.getElementById("HealthBar").innerHTML = 	""
+					document.getElementById("EnemyHealthBar").innerHTML = 	""
+					document.body.style.background = "black";
 					document.getElementById("backButton").disabled = true;
+					document.getElementById("text").style.color = 'red';
+					document.getElementById("header").style.color = 'red';
+					bars.style.display = "none";
+				}
+				if(textInt==7){
+					enemyBar.style.display = "block";
+					document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:red'></p>"
+					turntoggler=1;
+					menuBar.style.display = "block";
+					document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"</div>"
+					enemyhealthpoints = 1000;
+					bars.style.display = "block";
+					document.getElementById("p1").innerHTML = "As you round the corner you see a giant blocking your path. He looms over you as you notice the dozens of resumes and applications scattered on the ground around you. You look to the bottom right corner of the screen to notice that he has 1000 health points.<br></br>As you sit and ponder your incoming destruction, you have yet another epiphany; you have excellent people skills. You worked at call center on campus this last fall semester; Telefund. Maybe you can use these skills to gain an advantage";
+					document.getElementById("text").style.color = 'red';
+					document.getElementById("header").style.color = 'red';
+					buttons.style.display = "none";
+					document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints/10+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"</div>"
+				}
+				if(textInt==8){
+					enemyBar.style.display = "none";
+					document.getElementById("p1").innerHTML = "'Wow, that guy was actually pretty friendly once you got to talking to him' You head on to what you assume to be your final enemy, right in front of where you are to submit your applications"
+					document.getElementById("HealthBar").innerHTML = 	""
+					document.getElementById("EnemyHealthBar").innerHTML = 	""
+					document.body.style.background = "grey";
+					document.getElementById("backButton").disabled = true;
+					document.getElementById("text").style.color = 'blue';
+					document.getElementById("header").style.color = 'blue';
+					bars.style.display = "none";
 				}
 		}
 		function lastText(){
-			if(textInt<6){
+			if(textInt<9){
 				if(textInt>0){
 					textInt = textInt-1;
 				}
@@ -170,29 +207,42 @@
 					enemyBar.style.display = "none";
 					document.getElementById("striker").disabled = false;
 					document.getElementById("armorerbutton").disabled = false;
+					document.getElementById("persuader").disabled = false;
 			}else{
 					document.getElementById("striker").disabled = true;
 					document.getElementById("armorerbutton").disabled = true;
+					document.getElementById("persuader").disabled = true;
 					enemyBar.style.display = "block";
 					if(textInt==5){
 					document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:green'> The Goblin hurls a trashcan lid at you at an extreme speed<br></br><button id = 'hurter' onclick='hurtYou()'>Next</button></p>"
 					}
 			}
 			turnBaser();
-		}
+		} 
 		function levelUp(){
 			playerlevel = playerlevel+1;
 				if(playerlevel==2){
 					armorerbutton.style.display = "block";
 				}
-			menuBar.style.display = "none";
+				if(playerlevel==3){
+					persuader.style.display = "block";
+				}
 			healthpoints = 100;
 			document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"%</div>"
 			if(textInt==2){
+				menuBar.style.display = "none";
 				document.getElementById("p1").innerHTML = "Congratulations!;<br></br>You have defeated your enemy, Though it seems he had not reached his full potential yet";
 			}
 			if(textInt==5){
+				menuBar.style.display = "none";
 				document.getElementById("p1").innerHTML = "Whew!<br></br>'That was a close one', you think to yourself.<br></br> 'if only a potential employer had seen how impressive that was!'";
+			}
+			if(textInt==7){
+				document.getElementById("p1").innerHTML = "	He steps aside and allows you to pass "
+				bars.style.display = "none";
+				buttons.style.display = "block";
+				One.pause();
+				success.play();
 			}
 		}
 		
@@ -205,6 +255,12 @@
 			}
 			level2bar.style.display = "block";
 			document.getElementById("rockBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:red; width: "+armorpoints*2+"%; background-color:black; ' aria-valuenow='50' aria-valuemin='0' aria-valuemax='50'> Armor: "+armorpoints+"</div>"
+			turntoggler = turntoggler + 1;
+			turnBaser();
+		}
+		function persuade(){
+			document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:red'> 'You know what? I like you, go on and turn in your application'<br></br></p>"
+			levelUp();
 			turntoggler = turntoggler + 1;
 			turnBaser();
 		}
@@ -250,7 +306,7 @@
 			document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"%</div>"
 			}
 			if(textInt==5){
-			document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints*2+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"%</div>"
+			document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints*2+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"</div>"
 			}
 			turntoggler = turntoggler + 1;
 			turnBaser();
