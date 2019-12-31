@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!--If you are looking at my code I hope you are not a web developer!-->
+<!--This was just something I did to show I can learn, I had no prior HTML experience up to the few days of making this. -->
 <html>
 	<head>
 	<title>Adam Weatherby RPG</title>
@@ -17,9 +19,7 @@
 		<hr>
 			<div id ="text">
 				<p id = "p1" align="center">
-					You are Adam Weatherby, a 21 year old college student trying to get an internship for Computer Science.<br></br>
-					You seem to have forgotten important details about your qualifications and past experience that you need<br></br>
-					With hopes that it will come back to you 
+					You are Adam Weatherby, a 21 year old college student trying to get an internship in the field of Computer Science.<br></br>You seem to have forgotten important details about your past work experience that you need.<br></br>With hopes that it will come back to you, you head on out the door.<br></br>(warning there is music from this point on, so either press the mute button or adjust volume accordingly)
 				</p>		
 			</div>
 			
@@ -46,7 +46,21 @@
 			</div>
 			
 			
-			
+				<div id = "muteBar">
+					<div class="col-md-12"; style= "width:100%; height:100%;"align="center">
+						<p id = "muteText" align="center"></p>
+						<button id = "muteButton" onclick="muteToggler();muter()">Mute</button>
+					</div>
+				</div>
+				
+				<div id = "cheatBar">
+					<div class="col-md-12"; style= "width:100%; height:100%;"align="center">
+						<p id = "cheatText" align="center"></p>
+						<button id = "cheatButton" onclick="cheater()" style= "display:none;">(Toggle Cheats)</button></br>
+						<button id = "respawnButton" onclick="respawner()" style= "display:none;">Respawn</button>
+					</div>
+				</div>
+				
 			<footer id = "bars" class="page-footer"; style="position:fixed; bottom:0; width:100%; display:none">
 				<div id ="level2bar"class="col-md-3" style="align:right; display:none">
 					<div id = "rockBar"class="progress">
@@ -79,6 +93,11 @@
 		var Halo = new Audio("./Halo.mp3");
 		var One = new Audio("./giantOne.mp4");
 		var success = new Audio("./Success.mp4");
+		var queen = new Audio("./queen.mp4");
+		var muteToggle = false;
+		var cheatToggle = false;
+		var persuaded = false;
+		var deathTracker = 0;
 
 		var textInt = 0;
 		function nextText(){
@@ -86,8 +105,46 @@
 			textInt = textInt+1;
 			}
 		}
-
-			
+		function muteToggler(){
+			if(muteToggle==false){
+				muteToggle = true;
+			}
+			else{
+				muteToggle = false;
+			}
+		}
+		
+		function cheater(){
+			if(cheatToggle==false){
+				cheatToggle = true;
+			}
+			else{
+				cheatToggle = false;
+			}
+		}
+	
+		function muter(){
+					Metal.pause();
+					queen.pause();
+					Halo.pause();
+					One.pause();
+					document.getElementById("muteBar").innerHTML = 	"<div class='col-md-12'; style= 'width:100%; height:100%;'align='center'> <p id = 'muteText' align='center'></p> <button id = 'muteButton' onclick='muteToggler();muter()'>Unmute</button></div>";
+			if(muteToggle==false){
+					document.getElementById("muteBar").innerHTML = 	"<div class='col-md-12'; style= 'width:100%; height:100%;'align='center'> <p id = 'muteText' align='center'></p> <button id = 'muteButton' onclick='muteToggler();muter()'>Mute</button></div>";
+				if(textInt==1||textInt==2){
+					Metal.play();
+				}
+				if(textInt==4||textInt==5){
+					Halo.play();
+				}
+				if(textInt==7){
+					One.play();
+				}
+				if(textInt==8){
+					queen.play();
+				}
+			}
+		}
 		function textChanger(){
 			var menu = document.getElementById("menuBar");
 				if (textInt==2) {
@@ -97,26 +154,24 @@
 				}
 
 				if(textInt==0){
-					document.getElementById("p1").innerHTML = "You are Adam Weatherby, a 21 year old college student trying to get an internship for Computer Science."+"<br></br>"+"You seem to have forgotten important details about your qualifications and past experience that you need"+"<br></br>"+"With hopes that it will come back to you";
+					document.getElementById("p1").innerHTML = "You are Adam Weatherby, a 21 year old college student trying to get an internship in the field of Computer Science."+"<br></br>"+"You seem to have forgotten important details about your past work experience that you need."+"<br></br>"+"With hopes that it will come back to you, you head on out the door.<br></br>(warning there is music from this point on, so either press the mute button or adjust volume accordingly)";
 					document.getElementById("text").style.color = 'black';
 					document.getElementById("header").style.color = 'black';
 					document.body.style.background = "white";
 
 					}
 				if(textInt==1){
-					document.getElementById("p1").innerHTML = "You start heading out the door and as you make progress down the road the earth begins to shake."+"<br></br>"+"You here a loud noise from above";
+					document.getElementById("p1").innerHTML = "You start heading out the door and as you make progress down the road the earth begins to shake."+"<br></br>"+"You hear a loud noise from above";
 					document.body.style.background = "grey";
 					document.getElementById("text").style.color = 'yellow';
 					document.getElementById("header").style.color = 'yellow';
 					document.getElementById("HealthBar").innerHTML = 	"";
 					document.getElementById("EnemyHealthBar").innerHTML = "";
-					Metal.play();
-
 					}
 				if(textInt==2){
 					document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:yellow'>The enemy hurls a weak ball of energy at you.<br></br><button id = 'hurter' onclick='hurtYou()'>Next</button></p>"
 					document.body.style.background = "black";
-					document.getElementById("p1").innerHTML = "An enemy approaches"+"<br></br>"+"It seems that an entity of the weather itself has decided to try to inhibit your progress to turn in your application";
+					document.getElementById("p1").innerHTML = "An enemy approaches."+"<br></br>"+"It seems that an entity of the weather itself has decided to try to inhibit your progress to turn in your application";
 					document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"</div>"
 					document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"</div>"
 					buttons.style.display = "none";
@@ -135,13 +190,12 @@
 					document.getElementById("backButton").disabled = true;
 				}
 				if(textInt==4){
-					Metal.pause();
-					Halo.play();
 					document.getElementById("p1").innerHTML = "The sun begins to set<br></br>As it is getting late, you take a shortcut through an alleyway.<br></br>You hear rustling in the trash can behind you and you turn around";
 					document.getElementById("backButton").disabled = false;
 					document.body.style.background = "linear-gradient(to bottom, #6600cc 10%, #ff6600 100%) fixed";
 				}
 				if(textInt==5){
+					healthpoints = 100;
 					document.getElementById("striker").disabled = true;
 					document.getElementById("armorerbutton").disabled = true;
 					document.getElementById("p1").innerHTML = "A goblin bursts from the trashcan, he gets a surprise attack on you for massive damage.<br></br>As this happens you remember that you were a lab assistant at PH Broughton during the Fall season of 2017<br></br> This experience with analyzing and interpreting information allows you to now build armor best suited to the situation to prevent damage";
@@ -158,8 +212,6 @@
 					document.getElementById("backButton").disabled = true;
 				}
 				if(textInt==6){
-					Halo.pause();
-					One.play();
 					document.getElementById("p1").innerHTML = "<br></br>It is dark out now<br></br>You head on down the road full of confidence, if that enemy could not defeat you then you must truly be destined to succeed";
 					document.getElementById("HealthBar").innerHTML = 	""
 					document.getElementById("EnemyHealthBar").innerHTML = 	""
@@ -170,14 +222,16 @@
 					bars.style.display = "none";
 				}
 				if(textInt==7){
-					enemyBar.style.display = "block";
-					document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:red'></p>"
+					document.body.style.background = "black";
 					turntoggler=1;
+					healthpoints = 100;
+					enemyBar.style.display = "none";
+					document.getElementById("enemyBar").innerHTML = "<br></br><button id = 'hurter' onclick='hurtYou()'>Next</button>"
 					menuBar.style.display = "block";
 					document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"</div>"
 					enemyhealthpoints = 1000;
 					bars.style.display = "block";
-					document.getElementById("p1").innerHTML = "As you round the corner you see a giant blocking your path. He looms over you as you notice the dozens of resumes and applications scattered on the ground around you. You look to the bottom right corner of the screen to notice that he has 1000 health points.<br></br>As you sit and ponder your incoming destruction, you have yet another epiphany; you have excellent people skills. You worked at call center on campus this last fall semester; Telefund. Maybe you can use these skills to gain an advantage";
+					document.getElementById("p1").innerHTML = "SURPRISE!<br></br>As you round the corner you see a giant blocking your path. He looms over you as you notice the dozens of resumes and applications scattered on the ground around you. You look to the bottom right corner of the screen to notice that he has 1000 health points.<br></br>As you sit and ponder your incoming destruction, you have yet another epiphany; you have excellent people skills. You worked at call center on campus this last fall semester; Telefund. Maybe you can use these skills to gain an advantage";
 					document.getElementById("text").style.color = 'red';
 					document.getElementById("header").style.color = 'red';
 					buttons.style.display = "none";
@@ -185,7 +239,7 @@
 				}
 				if(textInt==8){
 					enemyBar.style.display = "none";
-					document.getElementById("p1").innerHTML = "'Wow, that guy was actually pretty friendly once you got to talking to him' You head on to what you assume to be your final enemy, right in front of where you are to submit your applications"
+					document.getElementById("p1").innerHTML = "'Wow, that guy was actually pretty friendly once you got to talking to him'<br></br>You head on forward and succesfully submit your applcation"
 					document.getElementById("HealthBar").innerHTML = 	""
 					document.getElementById("EnemyHealthBar").innerHTML = 	""
 					document.body.style.background = "grey";
@@ -193,7 +247,20 @@
 					document.getElementById("text").style.color = 'blue';
 					document.getElementById("header").style.color = 'blue';
 					bars.style.display = "none";
+					buttons.style.display = "none";
 				}
+				if(textInt==99){
+					document.getElementById("p1").innerHTML = "Well, you died.<br></br>If you wish to complete the game you can start over at the beginning of the the last fight. <br></br>If you just want to get through it you could always cheat as well";
+					enemyBar.style.display = "none";
+					document.body.style.background = "red";		
+					document.getElementById("text").style.color = 'black';
+					document.getElementById("header").style.color = 'black';
+					cheatButton.style.display = "block";
+					respawnButton.style.display = "block";
+					bars.style.display = "none";
+					buttons.style.display = "none";
+				}
+				muter();
 		}
 		function lastText(){
 			if(textInt<9){
@@ -215,7 +282,7 @@
 					enemyBar.style.display = "block";
 					if(textInt==5){
 					document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:green'> The Goblin hurls a trashcan lid at you at an extreme speed<br></br><button id = 'hurter' onclick='hurtYou()'>Next</button></p>"
-					}
+				}
 			}
 			turnBaser();
 		} 
@@ -231,21 +298,26 @@
 			document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"%</div>"
 			if(textInt==2){
 				menuBar.style.display = "none";
-				document.getElementById("p1").innerHTML = "Congratulations!;<br></br>You have defeated your enemy, Though it seems he had not reached his full potential yet";
+				document.getElementById("p1").innerHTML = "Congratulations!;<br></br>You have defeated your enemy, You will not let a little opposition stop you.";
 			}
 			if(textInt==5){
 				menuBar.style.display = "none";
 				document.getElementById("p1").innerHTML = "Whew!<br></br>'That was a close one', you think to yourself.<br></br> 'if only a potential employer had seen how impressive that was!'";
 			}
 			if(textInt==7){
-				document.getElementById("p1").innerHTML = "	He steps aside and allows you to pass "
-				bars.style.display = "none";
 				buttons.style.display = "block";
-				One.pause();
-				success.play();
+				if(muteToggle==false&&persuaded==true){
+					One.pause();
+					document.getElementById("p1").innerHTML = "	He steps aside and allows you to pass "
+					bars.style.display = "none";
+					success.play();
+				}
+				else{
+					document.getElementById("p1").innerHTML = "	He falls to the ground against all of your might,<br></br>The defeated Giant looks to you and says</br>'How did you do this?! it is supposed to be impossible to beat me, you didn't even try talking to me. I am actually pretty friendly once you start talking to me.'"
+					document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:red'> 'How did you do this?! it is supposed to be impossible to beat me, you didn't even try talking to me.'<br></br></p>"
+				}
 			}
 		}
-		
 		function armorer(){
 			if(armorpoints>=20){
 				armorpoints = 50;
@@ -259,6 +331,7 @@
 			turnBaser();
 		}
 		function persuade(){
+			persuaded = true;
 			document.getElementById("enemyBar").innerHTML = "<p id = 'enemyText'; style = 'color:red'> 'You know what? I like you, go on and turn in your application'<br></br></p>"
 			levelUp();
 			turntoggler = turntoggler + 1;
@@ -283,30 +356,82 @@
 					armorpoints = armorpoints - 35;
 				}
 			}
+			if(textInt == 7){
+			var carryover = 0;
+				if(armorpoints==0){
+					healthpoints = healthpoints - 35;
+				}
+				if(armorpoints!=0&&armorpoints<35){
+					carryover = 35 - armorpoints;
+					armorpoints = 0;
+					healthpoints = healthpoints - carryover;
+				}
+				if(armorpoints>=35){
+					armorpoints = armorpoints - 55;
+				}
+			}
 			document.getElementById("rockBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:red; width: "+armorpoints*2+"%; background-color:black; ' aria-valuenow='50' aria-valuemin='0' aria-valuemax='50'> Armor: "+armorpoints+"</div>"
 			document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"%</div>"
 			turntoggler = turntoggler + 1;
+			if(healthpoints<=0){
+				healthpoints = 0;
+				deathScreen();
+				document.getElementById("HealthBar").innerHTML = 	"<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+healthpoints+"%; background-color:green; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'> Your Health: "+healthpoints+"%</div>"
+			}
 			turnBaser();
+		}
+		
+		function deathScreen(){
+			deathTracker = textInt;
+			textInt = 99;
+			textChanger();
+		}
+		function respawner(){
+			respawnButton.style.display = "none";
+			textInt = deathTracker;
+			textChanger();
 		}
 		
 		function strikeEnemy(){
 			if(textInt==2){
-				enemyhealthpoints = enemyhealthpoints - 23;
+				if(cheatToggle==false){
+					enemyhealthpoints = enemyhealthpoints - 26;
+				}
+				else{
+					enemyhealthpoints = enemyhealthpoints-101;
+				}
 			}
 			if(textInt==5){
-				enemyhealthpoints = enemyhealthpoints - 15;
+				if(cheatToggle==false){
+					enemyhealthpoints = enemyhealthpoints - 15;
+				}
+				else{
+					enemyhealthpoints = enemyhealthpoints-100;
+				}
+			}
+			if(textInt==7){
+				if(cheatToggle==false){
+					enemyhealthpoints = enemyhealthpoints - 25;
+				}
+				else{
+					enemyhealthpoints = enemyhealthpoints-1001;
+				}
 			}
 			
 			if(enemyhealthpoints<0){
 				enemyhealthpoints = enemyhealthpoints*0;
 				levelUp();
 				buttons.style.display = "block";
+
 			}
 			if(textInt==2){
 			document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"%</div>"
 			}
 			if(textInt==5){
 			document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints*2+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"</div>"
+			}
+			if(textInt==7){
+			document.getElementById("EnemyHealthBar").innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style='color:black; width: "+enemyhealthpoints/10+"%; background-color:red; ' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'>Enemy Health: "+enemyhealthpoints+"</div>"
 			}
 			turntoggler = turntoggler + 1;
 			turnBaser();
