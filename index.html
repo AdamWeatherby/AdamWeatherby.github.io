@@ -306,11 +306,13 @@
 			}
 			if(textInt==7){
 				buttons.style.display = "block";
-				if(muteToggle==false&&persuaded==true){
+				if(persuaded==true){
 					One.pause();
 					document.getElementById("p1").innerHTML = "	He steps aside and allows you to pass "
 					bars.style.display = "none";
-					success.play();
+					if(muteToggle==true){
+						success.play();
+					}
 				}
 				else{
 					document.getElementById("p1").innerHTML = "	He falls to the ground against all of your might,<br></br>The defeated Giant looks to you and says</br>'How did you do this?! it is supposed to be impossible to beat me, you didn't even try talking to me. I am actually pretty friendly once you start talking to me.'"
