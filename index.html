@@ -94,6 +94,7 @@
 		var playerlevel = 1;
 		var Metal = new Audio("./For Whom The Bell Tolls.webm");
 		var Halo = new Audio("./Halo.mp3");
+		var Chopin = new Audio("./chopin.mp4");
 		var One = new Audio("./giantOne.mp4");
 		var success = new Audio("./Success.mp4");
 		var queen = new Audio("./queen.mp4");
@@ -134,7 +135,7 @@
 					document.getElementById("muteBar").innerHTML = 	"<div class='col-md-12'; style= 'width:100%; height:100%;'align='center'> <p id = 'muteText' align='center'></p> <button id = 'muteButton' onclick='muteToggler();muter()'>Unmute</button></div>";
 			if(muteToggle==false){
 					document.getElementById("muteBar").innerHTML = 	"<div class='col-md-12'; style= 'width:100%; height:100%;'align='center'> <p id = 'muteText' align='center'></p> <button id = 'muteButton' onclick='muteToggler();muter()'>Mute</button></div>";
-				if(textInt==1||textInt==2){
+				if(textInt==1||textInt==2||textInt==3){
 					Metal.play();
 				}
 				if(textInt==4||textInt==5){
